@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="fa/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="fa/css/font-awesome.min.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="fonts"></script>
+<title>log in</title>
+</head>
+<style>
+html,body,h1,h2,h3,h4,h5,h6,label {font-family: "Roboto", sans-serif; color:#e5e5e5;}
+
+.canvas {
+  max-width: 900px;
+  max-height:580px;
+  overflow-y: scroll;
+  padding: 0px 0px;
+  background-color: white;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 0px;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  border-radius: 0px;
+}
+
+body {margin:0;}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    border-bottom:2px solid #bababa;
+
+}
+
+li.right {
+    float: right;
+}
+
+li.left {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: grey;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+a:hover#User{
+	background-color:#105171;
+	color:white;
+}
+
+a:hover#logout{
+	background-color:#fa9040;
+	color:white;
+}
+
+a:hover#analytics{
+	background-color: #999999;
+	color:white;
+}
+
+.center { 
+    position: relative;
+    cursor:pointer;
+}
+
+
+.center p {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color:white;
+}
+
+</style>
+<body background="back.jpg">
+<div class="container-fluid">
+	<div class="canvas">
+	<ul >
+		<li class="left"><a href="#">DashBoard</a></li>
+		<li class="right"><a href="#" id="logout"><span class="glyphicon glyphicon-log-out"></a></li>
+		<li class="right"><a href="#" id="analytics"><span class="fa fa-pie-chart"></span></a></li>
+	    <li class="right"><a href="#" id="User"><span class="fa fa-user-o"></span></a></li>
+	    
+	</ul>
+	<div style="display:flex;">
+		<div class="col-md-3" style="padding:0;">
+			<div class="center" style="height:150px;width:70%;margin:1em;background-color: #2b2a45;">
+				<p class="Lodge"><i class="fa fa-wrench fa-5x" aria-hidden="true"></i>
+				</p>
+			</div>
+			<div class="center" style="height:150px;width:70%;margin:1em;background-color:SlateBlue;">
+				<p class="Status"><i class="fa fa-spinner fa-5x" aria-hidden="true"></i>
+				</p>
+			</div>
+			<div class="center" style="height:150px;width:70%;margin:1em;background-color: DodgerBlue;">
+				<p class="History"><i class="fa fa-history fa-5x" aria-hidden="true"></i>
+				</p>
+			</div>
+		</div>
+		<div class="col-md-9" id="info" style="margin:1em 1em 1em 0;overflow:scroll;">
+				<h2 id="heading"></h2>
+				<hr>
+				<div name="form" id="user">
+				<h4><div class="row"><div class=col-md-1><span class="glyphicon glyphicon-user"></span></div><div id="actype" class="col-md-10"></div></h4>
+				<h4 id="hostelParent" style="display:none;"><div class="row"><div class=col-md-1><span class="glyphicon glyphicon-home"></span></div><div id="hostel" class="col-md-10"></div></h4>
+				<h4 id="rollnoParent" style="display:none;"><div class="row"><div class=col-md-1><span class="glyphicon glyphicon-option-vertical"></span></div><div id="rollno" class="col-md-10"></div></h4>
+				<h4><div class="row"><div class=col-md-1><span class="glyphicon glyphicon-envelope"></span></div><div id="email" class="col-md-10"></div></h4>
+				<h4><div class="row"><div class=col-md-1><span class="glyphicon glyphicon-phone-alt"></span></div><div id="mobile" class="col-md-10"></div></div></h4>
+				</div>
+
+				<form class="form-horizontal" id="lodge" name="form" method="post" action="/lodge" style="display:none;">
+					<div style="margin:2em; color:black;">
+					<input id="student_id" name="student_id" value="" style="display:none;">
+					<div class="form-group">
+					    <label style="text-align: left;" class="control-label col-sm-2" for="email">Type:</label>
+					    <div class="col-sm-10">
+					      	<select class="form-control" id="type" name="type">
+							    <option>Select</option>
+							    <option>hostel</option>
+							    <option>personnel</option>
+							</select>
+					    </div>
+					</div>
+				
+					<div class="form-group">
+					    <label style="text-align: left;" class="control-label col-sm-2" for="email">Equipment:</label>
+					    <div class="col-sm-10">
+					      	<select class="form-control" id="equipment" name="subject">
+							</select>
+					    </div>
+					</div>
+					
+					<div class="form-group">
+					    <label style="text-align: left;" class="control-label col-sm-2" for="email">Assistance:</label>
+					    <div class="col-sm-10">
+					      	<input class="form-control" id="assistance" style="text-align: center; border:none; background-color:transparent;color:white;" value="None" readonly name="category">
+					    </div>
+					</div>
+
+					<div class="form-group">
+					    <label style="text-align: left;" class="control-label col-sm-2" for="email">Slot:</label>
+					    <div class="col-sm-10">
+					      	<select class="form-control" id="slot" name="time_slot">
+							    <option>10:00-12:00</option>
+							    <option>13:00-15:00</option>
+							    <option>16:00-18:00</option>
+							</select>
+					    </div>
+					</div>
+				
+					<div class="form-group">
+					    <label style="text-align: left;" class="control-label col-sm-2" for="email">Description:</label>
+					    <div class="col-sm-10">
+								<input class="form-control" id="assistance" name="description">
+					    </div>
+					</div>
+					
+					<div class="form-group" style="text-align: center;">
+					<input type="submit" id="submitLodge" class="btn btn-info btn-lg" style="margin-top:2em;color:white; border-radius:0px;" value="Lodge">
+					</div>
+					</div>
+				</form>
+
+				<div id="history" class="col-md-12" name="form" style="position:absolute;display:none;width:auto;">
+
+				</div>
+		</div>
+	</div>
+	</div>
+</div>
+</body>
+</html>
+<script>
+
+$('.center')
+  .css('cursor', 'pointer')
+  .click(
+    function(){
+     $("#info").css("background-color",$(this).css("background-color"));
+     $("[name='form']").css("display","none");
+     var temp="#";
+     //console.log($("#heading").text($(this).find("p").attr("class")));
+     temp+=$(this).find("p").attr("class").toLowerCase();
+     $("#heading").text($(this).find("p").attr("class"));
+     $(temp).css("display","inline");
+    }
+  )
+  .hover(
+    function(){
+      $(this).css('filter','brightness(80%)');
+    },
+    function(){
+      $(this).css('filter','brightness(100%)');
+    }
+  );
+
+  $(document).ready(function(){
+  	$('#User').trigger('click');
+  	$("#info").css("background-color","#105171");
+	});
+
+  $("#User").click(function(){
+  	$("[name='form']").css("display","none");
+  	$("#info").css("background-color",$("#User").css("background-color"));
+ 	$.ajax({
+		type: 'get',
+		url: '/userData',
+		success: function (data) {
+			console.log(data);
+			if(data=="false")
+				window.location.href = "./";
+			else{
+				var value=JSON.parse(data);
+				console.log(value);
+				$("#heading").html(value[0].name);
+				if(value[0].student_id){
+					$("#student_id").val(value[0].student_id);
+					//console.log("aaa "+$("#student_id").val());
+					$("#actype").html("&nbsp;&nbsp; Student");
+					$("#hostel").html("&nbsp;&nbsp; "+value[0].gender+" "+value[0].room_no);
+					$("#hostelParent").css("display","block");
+					$("#rollno").html("&nbsp;&nbsp; "+value[0].roll_no);
+					$("#rollnoParent").css("display","block");
+				}
+				if(value[0].admin_id){
+					$("#actype").html("&nbsp;&nbsp; Admin");
+				}
+				if(value[0].handyman_id){
+					$("#actype").html("&nbsp;&nbsp; Handyman");
+					$("#rollno").html("&nbsp;&nbsp; "+value[0].Catagory);
+					$("#rollnoParent").css("display","block");
+				}
+				$("#email").html("&nbsp;&nbsp; "+value[0].email);
+				$("#mobile").html("&nbsp;&nbsp; "+value[0].phone_no);
+				$("#user").css("display","block");
+			}
+		}	
+	});
+})
+
+$("#feedback").click(function(){
+	$.ajax({
+		type: 'get',
+		url: '/feedback',
+		data: { 
+        "rating": $("#rating").val(),
+        "review": $("#review").val(),
+        "id":$("#complaint_id").val()
+    	},
+		success: function (data) {
+			if(data=="true"){
+				$("#feedback").html("Thank You");
+				$("#feedback").attr("disabled",true);
+				$(".History").trigger("click");
+			}
+		}
+	});
+});
+
+$(".History").click(function(){
+	console.log("yes");
+	$.ajax({
+		type: 'get',
+		url: '/complaintHistory',
+		data: { 
+        "student_id": $("#student_id").val()
+    	},
+		success: function (data) {
+			data=JSON.parse(data);
+			console.log(data.length);
+			$("#history").html("");
+			for(var i=0;i<data.length;++i){
+				createHistory(data[i]);
+			}
+		}
+	});
+}) 
+
+function createHistory(data){
+	var div=document.createElement("div");
+	div.setAttribute("class", "col-md-12");
+	div.style.margin="2px";
+	div.style.border="1px solid black";
+	var divMain = document.createElement("div");
+	divMain.setAttribute("class", "form-group");
+//------------------------------------------------------//
+	var labelMain1=document.createElement("label");
+	labelMain1.setAttribute("class","control-label col-sm-1");
+	labelMain1.innerHTML="<b>Date:</b>";
+	labelMain1.style.textAlign="left";
+	
+	var divMain1=document.createElement("div");
+	divMain1.setAttribute("class","col-sm-4");
+	
+	var p1=document.createElement("p");
+	p1.style.textAlign="left";
+	p1.style.color="black";
+	p1.innerHTML="<strong>"+data.date.split("T")[0]+"</strong> <i>"+data.date.split("T")[1].split(".")[0]+"</i>";
+	divMain1.appendChild(p1);
+	divMain.appendChild(labelMain1);
+	divMain.appendChild(divMain1);
+//----------------------------------------------------------//
+
+	var labelMain2=document.createElement("label");
+	labelMain2.setAttribute("class","control-label col-sm-2");
+	labelMain2.innerHTML="<b>Equipment:</b>";
+	labelMain2.style.textAlign="left";
+	
+	var divMain2=document.createElement("div");
+	divMain2.setAttribute("class","col-sm-4");
+	
+	var p2=document.createElement("p");
+	p2.style.textAlign="left";
+	p2.innerHTML="<strong>"+data.subject+"</strong>";
+	p2.style.color="black";
+	divMain2.appendChild(p2);
+	divMain.appendChild(labelMain2);
+	divMain.appendChild(divMain2);
+
+//---------------------------------------------------------------------------//
+	var divMain3=document.createElement("div");
+	divMain3.setAttribute("class","col-sm-1");
+	divMain3.setAttribute("data-toggle","tooltip");
+	divMain3.setAttribute("data-placement","left");
+	divMain3.setAttribute("title","Lodged");
+	divMain3.style.margin="3px 0px";
+	var cl="btn btn-danger";
+	if(data.status=="1"){
+		cl="btn btn-warning";
+		divMain3.setAttribute("title","In Process");
+	}
+	if(data.status=="2"){
+		cl="btn btn-info";
+		divMain3.setAttribute("title","Solved");
+	}
+	if(data.status=="3"){
+		cl="btn btn-success";
+		divMain3.setAttribute("title","Closed");
+	}
+	divMain3.innerHTML='<button type="button" class="'+cl+' btn-sm" data-toggle="collapse" data-target="#demo'+data.complaint_id+'"> <span class="glyphicon glyphicon-chevron-down"></span></button>';
+  	divMain.appendChild(divMain3);
+
+//----------------------------------------------------------------------------//
+
+var divColl=document.createElement("div");
+divColl.setAttribute("class","collapse");
+divColl.setAttribute("id","demo"+data.complaint_id);
+createCollapse(divColl,"Type:",data.type,"Assistance:",data.catagory);
+if(data.description==""){
+	data.description="none";
+}
+createCollapse(divColl,"Slot:",data.time_slot,"Description:",data.description);
+var status="Lodged";
+if(data.status=="1"){
+	status="In process";
+}
+if(data.status=="2"){
+	status="Solved";
+}
+if(data.status=="3"){
+	status="Closed";
+}
+createCollapse(divColl,"Cost:",data.cost,"Status:",status);
+if(status=="Solved")
+	createCollapseButton(divColl,data);
+//----------------------------------------------------------------------------//
+div.appendChild(divMain);
+div.appendChild(divColl);
+console.log(data);
+//console.log(collapseDiv.innerHTML);
+$("#history").append(div);
+$('[data-toggle="tooltip"]').tooltip(); 
+	//$("#history").append(collapseDiv);
+}
+
+function createCollapseButton(div,data){
+	var divMain = document.createElement("div");
+	divMain.setAttribute("class", "form-group");
+//------------------------------------------------------//
+	
+	var divMain1=document.createElement("Button");
+	divMain1.setAttribute("class","col-sm-offset-4 col-sm-2 btn btn-sm btn-primary");
+	divMain1.setAttribute("data-toggle","modal");
+	divMain1.setAttribute("data-target","#myModal");
+	var p1=document.createTextNode("Give Feedback");
+	divMain1.style.marginBottom="3px";
+	divMain1.onclick=function(){
+		$("#complaint_id").val(data.complaint_id);
+		console.log($("#complaint_id").val()+" "+data.complaint_id);
+	};
+	divMain1.appendChild(p1);
+	divMain.appendChild(divMain1);
+//----------------------------------------------------------//
+	
+	var divMain2=document.createElement("Button");
+	divMain2.setAttribute("class","col-sm-offset-4 col-sm-2 btn btn-sm btn-danger");
+	divMain2.style.marginBottom="3px";
+	var p2=document.createTextNode("Not Solved");
+	divMain2.appendChild(p2);
+	divMain.appendChild(divMain2);
+	div.appendChild(divMain);
+}
+
+function createCollapse(div,l1,v1,l2,v2){
+
+	var divMain = document.createElement("div");
+	divMain.setAttribute("class", "form-group");
+//------------------------------------------------------//
+	var labelMain1=document.createElement("label");
+	labelMain1.setAttribute("class","control-label col-sm-1");
+	labelMain1.innerHTML="<b>"+l1+"</b>";
+	labelMain1.style.textAlign="left";
+	
+	var divMain1=document.createElement("div");
+	divMain1.setAttribute("class","col-sm-4");
+	
+	var p1=document.createElement("p");
+	p1.style.textAlign="left";
+	p1.style.color="black";
+	p1.innerHTML="<strong>"+v1+"</strong>";
+	divMain1.appendChild(p1);
+	divMain.appendChild(labelMain1);
+	divMain.appendChild(divMain1);
+//----------------------------------------------------------//
+
+	var labelMain2=document.createElement("label");
+	labelMain2.setAttribute("class","control-label col-sm-2");
+	labelMain2.innerHTML="<b>"+l2+"</b>";
+	labelMain2.style.textAlign="left";
+	
+	var divMain2=document.createElement("div");
+	divMain2.setAttribute("class","col-sm-5");
+	
+	var p2=document.createElement("p");
+	p2.style.textAlign="left";
+	p2.innerHTML="<strong>"+v2+"</strong>";
+	p2.style.color="black";
+	divMain2.appendChild(p2);
+	divMain.appendChild(labelMain2);
+	divMain.appendChild(divMain2);
+	div.appendChild(divMain);
+}
+
+var lodge = $('#lodge');
+lodge.submit(function () {
+	$.ajax({
+		type: lodge.attr('method'),
+		url: lodge.attr('action'),
+		data: lodge.serialize(),
+		success: function (data) {
+			if(data=="true"){
+				// $("#container").fadeOut(function() {
+				//   $(this).text("World").fadeIn();
+				// });
+				$("#submitLodge").fadeOut("slow",function() {
+				  $(this).val("Registered");
+				  $(this).prop("disabled",true);
+				}).fadeIn("slow",function(){
+				}).fadeOut("slow",function(){
+					$(this).val("Lodge");
+					$(this).prop("disabled",false);
+				}).fadeIn("slow",function(){
+					$('#lodge')[0].reset();
+					$('#equipment option').remove();
+				});
+			}
+		}	
+	});
+	return false;
+});
+
+$('#logout').click(function(){
+	$.ajax({
+		type: 'get',
+		url: '/logout',
+		success: function(data){
+			if(data=="true"){
+				window.location.href="./";
+			}
+		}
+	});
+});
+
+var values={};
+$( "#type" ).change(function() {
+  	$.ajax({
+		type: 'get',
+		url: '/complaint',
+		data: { 
+        "type": $("#type").val()
+    	},
+		success: function(data){
+			data=JSON.parse(data);
+			values={};
+			for(var i=0;i<data.length;++i){
+				var temp=data[i].equipment;
+				values[temp]=data[i].handman;
+			}
+			$('#equipment option').remove();
+			$.each(values, function (i, items) {
+			    $('#equipment').append($('<option>', {
+			        text : i 
+			    }));  
+			});
+			$("#assistance").val(values[$("#equipment").val()]);
+		}
+	});
+});
+
+$( "#equipment" ).change(function(){
+	$("#assistance").val(values[$(this).val()]);
+});
+</script>

@@ -1,0 +1,168 @@
+<html>
+<head>
+	<title>W3.CSS</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Audiowide|Source+Sans+Pro|Special+Elite" rel="stylesheet">
+	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
+	<style>
+		.fontAudiowide{
+			font-family: 'Audiowide', cursive;
+		}
+		.fontSpecialElite{
+			font-family: 'Special Elite', cursive;
+		}
+		.fontSourceSansPro{
+			font-family: 'Source Sans Pro', sans-serif;
+			color:grey;
+		}
+		a[name='dashBoardButtons']:hover{
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="w3-sidebar w3-bar-block w3-white w3-center w3-animate-left" style="width:20%"> 
+		<h3 class="w3-bar-item w3-center fontSpecialElite w3-border-bottom w3-border-grey" style="margin-bottom:0;">DashBoard</h3>
+	  	<a href="#lodgeDiv" class="w3-bar-item w3-button w3-padding-small w3-hover-blue" id="lodgeButton" name="dashBoardButtons"><h1><i class="fa fa-wrench" aria-hidden="true"></i></h1>
+	  	<h6 class="fontAudiowide">Lodge</h6></a>
+	  	<a href="#" class="w3-bar-item w3-button w3-padding-small w3-hover-blue" id="progressButton" name="dashBoardButtons"><h1><i class="fa fa-tasks" aria-hidden="true"></i></h1>
+	  	<h6 class="fontAudiowide">Progress</h6></a>
+	  	<a href="#infoHistory" class="w3-bar-item w3-button w3-padding-small w3-hover-blue"  id="historyButton" name="dashBoardButtons"><h1><i class="fa fa-history" aria-hidden="true"></i></h1>
+	  	<h6 class="fontAudiowide">History</h6></a>
+	  	<a href="#infoDiv" class="w3-bar-item w3-button w3-hover-blue w3-border-white"  id="infoButton" name="dashBoardButtons"><h1><i class="fa fa-info" aria-hidden="true"></i></h1><h6 class="fontAudiowide">Info</h6></a>
+	  	<a href="#" class="w3-bar-item w3-button w3-padding-small w3-hover-blue"  id="logout" name="dashBoardButtons"><h1><i class="fa fa-sign-out" aria-hidden="true"></i></h1>
+	  	<h6 class="fontAudiowide">Log Out</h6></a>
+	</div>
+
+<!-- //////////////////////////////////// LODGE/////////////////////////////////// --> 
+
+	<div class="w3-flat-clouds w3-display-container" style="margin-left:20%;height:100vh;" id="lodgeDiv" name="commonDivName">
+		<div class="w3-display-middle" style="width:70%;">
+			<div class="w3-white">
+				<header class="w3-container w3-flat-belize-hole">
+				  <h2 class="fontSourceSansPro w3-text-white" >Lodge a complaint</h2>
+				</header>
+				<div class="w3-container fontSourceSansPro">
+					<form id="lodgeForm" name="lodgeForm" method="post" action="/lodge">
+						<div class="w3-row w3-section">
+						  	<div class="w3-col m2 s4"><i class="w3-xxlarge fa fa-list-ul"></i></div>
+						    <div class="w3-rest">
+						    	<select class="w3-select fontSourceSansPro" style="background-color: white;" name="type" id="type">
+							    	<option value="" disabled selected>Choose your complaint type</option>
+								    <option>hostel</option>
+								    <option>personnel</option>
+							   	</select>
+						    </div>
+						</div>
+						<div class="w3-row w3-section">
+						  	<div class="w3-col m2 s4"><i class="w3-xxlarge fa fa-lightbulb-o"></i></div>
+						    <div class="w3-rest">
+						    	<select class="w3-select fontSourceSansPro" style="background-color: white;" id="equipment" name="subject">
+							    	<option value="" disabled selected>Choose Equipment</option>
+							   	</select>
+						    </div>
+						</div>
+						<div class="w3-row w3-section">
+						  	<div class="w3-col m2 s4"><i class="w3-xxlarge fa fa-user-o"></i></div>
+						    <div class="w3-rest">
+						    	<input class="w3-input fontSourceSansPro" id="assistance" style="background-color:transparent;" value="None" readonly name="category">
+						    </div>
+						</div>
+						<div class="w3-row w3-section">
+						  	<div class="w3-col m2 s4"><i class="w3-xxlarge fa fa-clock-o"></i></div>
+						  	<div class="w3-rest">
+							    <select class="w3-select  fontSourceSansPro" style="background-color: white;" id="slot" name="time_slot">
+								    <option>10:00-12:00</option>
+								    <option>13:00-15:00</option>
+								    <option>16:00-18:00</option>
+								</select>
+							</div>
+						</div>
+						<div class="w3-row w3-section">
+						  	<div class="w3-col m2 s4"><i class="w3-xxlarge fa fa-pencil"></i></div>
+						  	<div class="w3-rest">
+							    <select class="w3-select  fontSourceSansPro" style="background-color: white;" id="assistance" name="description">
+								    <option>Broken</option>
+								    <option>Replace</option>
+								    <option>Bolt and Latch</option>
+								    <option>Electric Fault</option>
+								    <option>Others</option>
+								</select>
+							</div>
+						</div>
+						<div class="w3-center ">
+						<input type="submit" id="submitLodge" class="w3-button w3-flat-belize-hole w3-hover-blue" style="margin-top:2em;" value="Lodge">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="w3-flat-clouds w3-display-container" style="margin-left:20%;height:100vh;max-height:100vh;overflow-y: scroll;" id="infoHistory" name="commonDivName">
+	</div>
+
+	<!-- ////////////////////////////// Info ////////////////////////-->
+
+	<div class="w3-flat-clouds w3-display-container" style="margin-left:20%;height:100vh;" id="infoDiv" name="commonDivName">
+		<div class="w3-display-middle" style="width:70%;">
+			<div class="w3-white ">
+				<header class="w3-container w3-flat-belize-hole">
+				  <h2 class="fontSourceSansPro w3-text-white" >Welcome <span id="userName">Anubhav</span></h2>
+				</header>
+				<div class="w3-container fontSourceSansPro">
+					<h2><span class="fa fa-user-o w3-col m2 s4"></span></h2><h3><span id="actype" class="w3-rest"> Student</span></h3>
+					<h2><span class="fa fa-home w3-col m2 s4"></span></h2><h3><span id="hostel" class="w3-rest"> M-315</span></h3>
+					<h2><span class="fa fa-sort-numeric-asc w3-col m2 s4"></span></h2><h3><span id="rollno" class="w3-rest">MT2016018</span></h3>
+					<h2><span class="fa fa-envelope-o w3-col m2 s4"></span></h2><h3><span id="email" class="w3-rest">Anubhav.Gupta@iiitb.org</span></h3>
+					<h2><span class="fa fa-phone w3-col m2 s4"></span></h2><h3><span id="mobile" class="w3-rest">+918305771509</span></h3>
+				</div>
+			</div>
+			<div class="w3-margin-top">
+			<div class="w3-third w3-light-grey">
+				<header style="text-align: center;" class="fontSourceSansPro">
+					<span class="w3-border-bottom w3-border-blue w3-tag w3-jumbo w3-flat-belize-hole w3-padding-large">
+					<span>5</span>
+					<h5 style="padding:0;margin:0;">Registered</h5></span>
+				</header>
+			</div>
+			<div class="w3-third w3-light-grey">
+				<header style="text-align: center;" class="fontSourceSansPro">
+					<span class="w3-border-bottom w3-border-blue w3-tag w3-jumbo w3-flat-belize-hole w3-padding-large">
+					<span>4</span>
+					<h5 style="padding:0;margin:0;">Completed</h5></span>
+				</header>
+			</div>
+			<div class="w3-third w3-light-grey">
+				<header style="text-align: center;" class="fontSourceSansPro">
+					<span class="w3-border-bottom w3-border-blue w3-tag w3-jumbo w3-flat-belize-hole w3-padding-large">
+					<span>1</span>
+					<h5 style="padding:0;margin:0;">Pending</h5></span>
+				</header>
+			</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+
+	$('[name="dashBoardButtons"]').click(function(){
+		$('[name="dashBoardButtons"]').removeClass('w3-border-light-grey w3-rightbar w3-flat-belize-hole');
+		$(this).addClass('w3-border-light-grey w3-rightbar w3-flat-belize-hole');
+		$('[name="commonDivName"]').addClass('w3-hide');
+		$('[name="commonDivName"]').removeClass('w3-animate-zoom');
+		$($(this).attr('href')).removeClass('w3-hide').addClass('w3-animate-zoom');
+	});
+
+	$('#lodgeButton').addClass('w3-border-light-grey w3-rightbar w3-flat-belize-hole');
+	$('[name="commonDivName"]').addClass('w3-hide');
+	$('[name="commonDivName"]').removeClass('w3-animate-zoom');
+	$('#lodgeDiv').removeClass('w3-hide').addClass('w3-animate-zoom');
+
+</script>
+</html>

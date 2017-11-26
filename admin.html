@@ -1,506 +1,285 @@
-<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="css/bootstrap-theme.min.css">
-<link rel="stylesheet" type="text/css" href="fa/css/font-awesome.css">
-<link rel="stylesheet" type="text/css" href="fa/css/font-awesome.min.css">
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
-<script src="js/jquery-1.9.1.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="fonts"></script>
-<title>log in</title>
+	<title>W3.CSS</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Audiowide|Source+Sans+Pro|Special+Elite" rel="stylesheet">
+	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
+	<style>
+		.fontAudiowide{
+			font-family: 'Audiowide', cursive;
+		}
+		.fontSpecialElite{
+			font-family: 'Special Elite', cursive;
+		}
+		.fontSourceSansPro{
+			font-family: 'Source Sans Pro', sans-serif;
+			color:grey;
+		}
+		a[name='dashBoardButtons']:hover{
+			background-color: red;
+		}
+	</style>
 </head>
-<style>
-html,body,h1,h2,h3,h4,h5,h6,label {font-family: "Roboto", sans-serif; color:#e5e5e5;}
+<body>
+	<div class="w3-sidebar w3-bar-block w3-white w3-center w3-animate-left" style="width:20%"> 
+		<h3 class="w3-bar-item w3-center fontSpecialElite w3-border-bottom w3-border-grey" style="margin-bottom:0;">DashBoard</h3>
+	  	<a href="#assignDiv" class="w3-bar-item w3-button w3-padding-small w3-hover-blue" id="assignButton" name="dashBoardButtons"><h1><i class="fa fa-briefcase" aria-hidden="true"></i></h1>
+	  	<h6 class="fontAudiowide">Assign</h6></a>
+	  	<a href="#watchDiv" class="w3-bar-item w3-button w3-padding-small w3-hover-blue" id="watchButton" name="dashBoardButtons"><h1><i class="fa fa-eye" aria-hidden="true"></i></h1>
+	  	<h6 class="fontAudiowide">Watch</h6></a>
+	  	<!-- <a href="#historyDiv" class="w3-bar-item w3-button w3-padding-small w3-hover-blue"  id="historyButton" name="dashBoardButtons"><h1><i class="fa fa-history" aria-hidden="true"></i></h1>
+	  	<h6 class="fontAudiowide">History</h6></a>
+	  	<a href="#infoDiv" class="w3-bar-item w3-button w3-hover-blue w3-border-white"  id="infoButton" name="dashBoardButtons"><h1><i class="fa fa-info" aria-hidden="true"></i></h1><h6 class="fontAudiowide">Info</h6></a>  -->
+	  	<a class="w3-bar-item w3-button w3-padding-small w3-hover-blue"  id="logoutButton" name="dashBoardButtons"><h1><i class="fa fa-sign-out" aria-hidden="true"></i></h1>
+	  	<h6 class="fontAudiowide">Log Out</h6></a>
+	</div>
 
-.canvas {
-  max-width: 900px;
-  max-height:580px;
-  overflow-y: scroll;
-  padding: 0px 0px;
-  background-color: white;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 0px;
-  margin: auto;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
-  border-radius: 0px;
-}
+<!-- //////////////////////////////////// ASSIGN FORM/////////////////////////////////// --> 
 
-body {margin:0;}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: white;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    border-bottom:2px solid #bababa;
-
-}
-
-li.right {
-    float: right;
-}
-
-li.left {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: grey;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-a:hover#User{
-	background-color:#105171;
-	color:white;
-}
-
-a:hover#logout{
-	background-color:#fa9040;
-	color:white;
-}
-
-a:hover#analytics{
-	background-color: #999999;
-	color:white;
-}
-
-.center { 
-    position: relative;
-    cursor:pointer;
-}
-
-
-.center p {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    color:white;
-}
-
-</style>
-<body background="back.jpg">
-<div class="container-fluid">
-	<div class="canvas">
-	<ul >
-		<li class="left"><a href="#">DashBoard</a></li>
-		<li class="right"><a href="#" id="logout"><span class="glyphicon glyphicon-log-out"></a></li>
-		<li class="right"><a href="#" id="analytics"><span class="fa fa-pie-chart"></span></a></li>
-	    <li class="right"><a href="#" id="User"><span class="fa fa-user-o"></span></a></li>
-	    
-	</ul>
-	<div style="display:flex;">
-		<div class="col-md-3" style="padding:0;">
-			<div class="center" style="height:150px;width:70%;margin:1em;background-color: #2b2a45;">
-				<p class="Lodge"><i class="fa fa-wrench fa-5x" aria-hidden="true"></i>
-				</p>
-			</div>
-			<div class="center" style="height:150px;width:70%;margin:1em;background-color:SlateBlue;">
-				<p class="Status"><i class="fa fa-spinner fa-5x" aria-hidden="true"></i>
-				</p>
-			</div>
-			<div class="center" style="height:150px;width:70%;margin:1em;background-color: DodgerBlue;">
-				<p class="History"><i class="fa fa-history fa-5x" aria-hidden="true"></i>
-				</p>
+	<div class="w3-flat-clouds w3-display-container" style="margin-left:20%;min-height:100vh;" id="assignDiv" name="commonDivName">
+		<div style="width:90%;margin:0 auto;">
+			<div class="w3-white">
+				<header class="w3-container w3-flat-belize-hole">
+				  <h2 class="fontSourceSansPro w3-text-white" >Assign Work</h2>
+				</header>
+				<div class="w3-container fontSourceSansPro">
+					<form class="w3-margin-top" id="assignForm" method='get' action='/generateWork'>
+					</form>
+				</div>
 			</div>
 		</div>
-		<div class="col-md-9" id="info" style="margin:1em 1em 1em 0;overflow:scroll;">
-				<h2 id="heading"></h2>
-				<hr>
-				<div name="form" id="user">
-				<h4><div class="row"><div class=col-md-1><span class="glyphicon glyphicon-user"></span></div><div id="actype" class="col-md-10"></div></h4>
-				<h4 id="hostelParent" style="display:none;"><div class="row"><div class=col-md-1><span class="glyphicon glyphicon-home"></span></div><div id="hostel" class="col-md-10"></div></h4>
-				<h4 id="rollnoParent" style="display:none;"><div class="row"><div class=col-md-1><span class="glyphicon glyphicon-option-vertical"></span></div><div id="rollno" class="col-md-10"></div></h4>
-				<h4><div class="row"><div class=col-md-1><span class="glyphicon glyphicon-envelope"></span></div><div id="email" class="col-md-10"></div></h4>
-				<h4><div class="row"><div class=col-md-1><span class="glyphicon glyphicon-phone-alt"></span></div><div id="mobile" class="col-md-10"></div></div></h4>
-				</div>
+	</div>
 
-				<form class="form-horizontal" id="lodge" name="form" method="post" action="/lodge" style="display:none;">
-					<div style="margin:2em; color:black;">
-					<input id="student_id" name="student_id" value="" style="display:none;">
-					<div class="form-group">
-					    <label style="text-align: left;" class="control-label col-sm-2" for="email">Type:</label>
-					    <div class="col-sm-10">
-					      	<select class="form-control" id="type" name="type">
-							    <option>Select</option>
-							    <option>hostel</option>
-							    <option>personnel</option>
-							</select>
-					    </div>
-					</div>
-				
-					<div class="form-group">
-					    <label style="text-align: left;" class="control-label col-sm-2" for="email">Equipment:</label>
-					    <div class="col-sm-10">
-					      	<select class="form-control" id="equipment" name="subject">
-							</select>
-					    </div>
-					</div>
-					
-					<div class="form-group">
-					    <label style="text-align: left;" class="control-label col-sm-2" for="email">Assistance:</label>
-					    <div class="col-sm-10">
-					      	<input class="form-control" id="assistance" style="text-align: center; border:none; background-color:transparent;color:white;" value="None" readonly name="category">
-					    </div>
-					</div>
+	<!-- ////////////////////////////// History ////////////////////////-->
 
-					<div class="form-group">
-					    <label style="text-align: left;" class="control-label col-sm-2" for="email">Slot:</label>
-					    <div class="col-sm-10">
-					      	<select class="form-control" id="slot" name="time_slot">
-							    <option>10:00-12:00</option>
-							    <option>13:00-15:00</option>
-							    <option>16:00-18:00</option>
-							</select>
-					    </div>
-					</div>
-				
-					<div class="form-group">
-					    <label style="text-align: left;" class="control-label col-sm-2" for="email">Description:</label>
-					    <div class="col-sm-10">
-								<input class="form-control" id="assistance" name="description">
-					    </div>
-					</div>
-					
-					<div class="form-group" style="text-align: center;">
-					<input type="submit" id="submitLodge" class="btn btn-info btn-lg" style="margin-top:2em;color:white; border-radius:0px;" value="Lodge">
-					</div>
-					</div>
-				</form>
-
-				<div id="history" class="col-md-12" name="form" style="position:absolute;display:none;width:auto;">
-
-				</div>
+	<div class="w3-flat-clouds w3-display-container" style="margin-left:20%;height:100vh;max-height:100vh;overflow-y: scroll;" id="historyDiv" name="commonDivName">
+		<div class="w3-center" style="width:80%;margin-left:15%;">
+			<header class="w3-container w3-flat-belize-hole" style="width:90%;">
+				 <h2 class="fontSourceSansPro w3-text-white" >History</span></h2>
+			</header>
+		</div>
+		<div id="historyDivChild" style="width:80%;margin-left:15%;">
+			
 		</div>
 	</div>
+
+	<!-- ////////////////////////////// Watch ////////////////////////// -->
+
+	<div class="w3-flat-clouds w3-display-container" style="margin-left:20%;height:100vh;max-height:100vh;overflow-y: scroll;" id="watchDiv" name="commonDivName">
+		<div class="w3-center" style="width:90%;margin:0 auto;">
+			<header class="w3-container w3-flat-belize-hole" style="width:100%;">
+				 <h2 class="fontSourceSansPro w3-text-white" >Watch</h2>
+			</header>
+		</div>
+		<div style="width:90%;margin:0 auto;">
+			<div class="fontSourceSansPro w3-margin-top">
+				<div class="w3-center">
+					<header class="w3-container w3-tag w3-center w3-flat-belize-hole w3-margin-top">
+					  	<h5 class="fontSourceSansPro w3-center w3-text-white" >Electrician</h5>
+					</header>
+				</div>
+				<div id="watchDivElectrician" class="w3-margin-top">
+					
+				</div>
+
+				<div class="w3-center">
+					<header class="w3-container w3-tag w3-center w3-flat-belize-hole">
+					  	<h5 class="fontSourceSansPro w3-center w3-text-white" >Carpenter</h5>
+					</header>
+				</div>
+				<div id="watchDivCarpenter" class="w3-margin-top">	
+					
+				</div>
+
+				<div class="w3-center">
+					<header class="w3-container w3-tag w3-center w3-flat-belize-hole">
+					  	<h5 class="fontSourceSansPro w3-center w3-text-white" >Others</h5>
+					</header>
+				</div>
+				<div id="watchDivOthers" class="w3-margin-top">
+					
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
+
+	<!-- ////////////////////////////// Info ////////////////////////-->
+
+	<div class="w3-flat-clouds w3-display-container" style="margin-left:20%;height:100vh;" id="infoDiv" name="commonDivName">
+		<div class="w3-display-middle" style="width:70%;">
+			<div class="w3-white ">
+				<header class="w3-container w3-flat-belize-hole">
+				  <h2 class="fontSourceSansPro w3-text-white" >Welcome <span id="userName">Anubhav</span></h2>
+				</header>
+				<div class="w3-container fontSourceSansPro">
+					<h2><span class="fa fa-user-o w3-col m2 s4"></span></h2><h3><span id="actype" class="w3-rest"> Student</span></h3>
+					<h2><span class="fa fa-home w3-col m2 s4"></span></h2><h3><span id="hostel" class="w3-rest"> M-315</span></h3>
+					<h2><span class="fa fa-sort-numeric-asc w3-col m2 s4"></span></h2><h3><span id="rollno" class="w3-rest">MT2016018</span></h3>
+					<h2><span class="fa fa-envelope-o w3-col m2 s4"></span></h2><h3><span id="email" class="w3-rest">Anubhav.Gupta@iiitb.org</span></h3>
+					<h2><span class="fa fa-phone w3-col m2 s4"></span></h2><h3><span id="mobile" class="w3-rest">+918305771509</span></h3>
+				</div>
+			</div>
+			<div class="w3-margin-top">
+			<div class="w3-third w3-light-grey">
+				<header style="text-align: center;" class="fontSourceSansPro">
+					<span class="w3-border-bottom w3-border-blue w3-tag w3-jumbo w3-flat-belize-hole w3-padding-large">
+					<span id="complaintsRegistered">5</span>
+					<h5 style="padding:0;margin:0;">Registered</h5></span>
+				</header>
+			</div>
+			<div class="w3-third w3-light-grey">
+				<header style="text-align: center;" class="fontSourceSansPro">
+					<span class="w3-border-bottom w3-border-blue w3-tag w3-jumbo w3-flat-belize-hole w3-padding-large">
+					<span id="complaintsSolved">4</span>
+					<h5 style="padding:0;margin:0;">Completed</h5></span>
+				</header>
+			</div>
+			<div class="w3-third w3-light-grey">
+				<header style="text-align: center;" class="fontSourceSansPro">
+					<span class="w3-border-bottom w3-border-blue w3-tag w3-jumbo w3-flat-belize-hole w3-padding-large">
+					<span id="complaintsPending">1</span>
+					<h5 style="padding:0;margin:0;">Pending</h5></span>
+				</header>
+			</div>
+			</div>
+		</div>
+	</div>
 </body>
-</html>
 <script>
 
-$('.center')
-  .css('cursor', 'pointer')
-  .click(
-    function(){
-     $("#info").css("background-color",$(this).css("background-color"));
-     $("[name='form']").css("display","none");
-     var temp="#";
-     //console.log($("#heading").text($(this).find("p").attr("class")));
-     temp+=$(this).find("p").attr("class").toLowerCase();
-     $("#heading").text($(this).find("p").attr("class"));
-     $(temp).css("display","inline");
-    }
-  )
-  .hover(
-    function(){
-      $(this).css('filter','brightness(80%)');
-    },
-    function(){
-      $(this).css('filter','brightness(100%)');
-    }
-  );
+$('[name="dashBoardButtons"]').click(function(){
+	$('[name="dashBoardButtons"]').removeClass('w3-border-light-grey w3-rightbar w3-flat-belize-hole');
+	$(this).addClass('w3-border-light-grey w3-rightbar w3-flat-belize-hole');
+	$('[name="commonDivName"]').addClass('w3-hide');
+	$('[name="commonDivName"]').removeClass('w3-animate-zoom');
+	$($(this).attr('href')).removeClass('w3-hide').addClass('w3-animate-zoom');
+});
 
-  $(document).ready(function(){
-  	$('#User').trigger('click');
-  	$("#info").css("background-color","#105171");
-	});
+$('#assignButton').addClass('w3-border-light-grey w3-rightbar w3-flat-belize-hole');
+$('[name="commonDivName"]').addClass('w3-hide');
+$('[name="commonDivName"]').removeClass('w3-animate-zoom');
+$('#assignDiv').removeClass('w3-hide').addClass('w3-animate-zoom');
 
-  $("#User").click(function(){
-  	$("[name='form']").css("display","none");
-  	$("#info").css("background-color",$("#User").css("background-color"));
- 	$.ajax({
-		type: 'get',
-		url: '/userData',
-		success: function (data) {
-			console.log(data);
-			if(data=="false")
-				window.location.href = "./";
-			else{
-				var value=JSON.parse(data);
-				console.log(value);
-				$("#heading").html(value[0].name);
-				if(value[0].student_id){
-					$("#student_id").val(value[0].student_id);
-					//console.log("aaa "+$("#student_id").val());
-					$("#actype").html("&nbsp;&nbsp; Student");
-					$("#hostel").html("&nbsp;&nbsp; "+value[0].gender+" "+value[0].room_no);
-					$("#hostelParent").css("display","block");
-					$("#rollno").html("&nbsp;&nbsp; "+value[0].roll_no);
-					$("#rollnoParent").css("display","block");
-				}
-				if(value[0].admin_id){
-					$("#actype").html("&nbsp;&nbsp; Admin");
-				}
-				if(value[0].handyman_id){
-					$("#actype").html("&nbsp;&nbsp; Handyman");
-					$("#rollno").html("&nbsp;&nbsp; "+value[0].Catagory);
-					$("#rollnoParent").css("display","block");
-				}
-				$("#email").html("&nbsp;&nbsp; "+value[0].email);
-				$("#mobile").html("&nbsp;&nbsp; "+value[0].phone_no);
-				$("#user").css("display","block");
-			}
-		}	
-	});
-})
 
-$("#feedback").click(function(){
+$('#assignButton').click(function(){
 	$.ajax({
-		type: 'get',
-		url: '/feedback',
-		data: { 
-        "rating": $("#rating").val(),
-        "review": $("#review").val(),
-        "id":$("#complaint_id").val()
-    	},
-		success: function (data) {
-			if(data=="true"){
-				$("#feedback").html("Thank You");
-				$("#feedback").attr("disabled",true);
-				$(".History").trigger("click");
+		type:'get',
+		url:'/adminGetAllHandyManInfo',
+		success:function(data){
+			if(data=="false"){
+				return;
+			}
+			data=JSON.parse(data);
+			console.log(data);
+			$('#assignForm').html('');
+			for(i in data)
+				createAssignForm(data[i]);
+			$('#assignForm').append(
+				'<div class="w3-center w3-margin-top">'+
+					'<input class="w3-button w3-flat-belize-hole w3-hover-blue" type="submit" id="submitAssign" value="Generate">'+
+				'</div>'
+			);
+		}
+	});
+});
+
+$('#watchButton').click(function(){
+	var arr=["Electrician","Carpenter","Others"];
+	$.ajax({
+		type:'get',
+		url:'/adminGetAllHandyManInfo',
+		async:false,
+		success:function(data){
+			if(data=="false"){
+				return;
+			}
+			data=JSON.parse(data);
+			for(i in arr){
+				$("#watchDiv"+arr[i]).html("")
+			}
+
+			for(i in data){
+				var handymanType="Others";
+				console.log(data[i]);
+				if(data[i].Catagory=="Electrician"){
+					handymanType="Electrician"
+				}
+				else if(data[i].Catagory=="Carpenter"){
+					handymanType="Carpenter";
+				}
+				$.ajax({
+					type:'get',
+					url:'/getHandyManRating',
+					async:false,
+					data:{
+						"handyman_id":data[i].handyman_id
+					},
+					success:function(rating){
+						if(rating=="false"){
+							alert("Error Try Again");
+							return;
+						}
+						data[i].rating=(JSON.parse(rating))[0].rating;
+						if(data[i].rating==null){
+							data[i].rating="-";
+						}
+						createWatch(handymanType,data[i]);
+					}
+				});
+			}
+		},
+		complete:function(){
+			for(i in arr){
+				if($("#watchDiv"+arr[i]).html()==""){
+					$("#watchDiv"+arr[i]).append(
+						'<div style="width:100%"><h4 class="w3-center fontAudiowide w3-text-grey">NO HANDYMAN HERE</h4></div>'
+					);
+				}
 			}
 		}
 	});
 });
 
-$(".History").click(function(){
-	console.log("yes");
+var assignForm = $('#assignForm');
+
+assignForm.submit(function(){
 	$.ajax({
-		type: 'get',
-		url: '/complaintHistory',
-		data: { 
-        "student_id": $("#student_id").val()
-    	},
-		success: function (data) {
-			data=JSON.parse(data);
-			console.log(data.length);
-			$("#history").html("");
-			for(var i=0;i<data.length;++i){
-				createHistory(data[i]);
-			}
-		}
-	});
-}) 
-
-function createHistory(data){
-	var div=document.createElement("div");
-	div.setAttribute("class", "col-md-12");
-	div.style.margin="2px";
-	div.style.border="1px solid black";
-	var divMain = document.createElement("div");
-	divMain.setAttribute("class", "form-group");
-//------------------------------------------------------//
-	var labelMain1=document.createElement("label");
-	labelMain1.setAttribute("class","control-label col-sm-1");
-	labelMain1.innerHTML="<b>Date:</b>";
-	labelMain1.style.textAlign="left";
-	
-	var divMain1=document.createElement("div");
-	divMain1.setAttribute("class","col-sm-4");
-	
-	var p1=document.createElement("p");
-	p1.style.textAlign="left";
-	p1.style.color="black";
-	p1.innerHTML="<strong>"+data.date.split("T")[0]+"</strong> <i>"+data.date.split("T")[1].split(".")[0]+"</i>";
-	divMain1.appendChild(p1);
-	divMain.appendChild(labelMain1);
-	divMain.appendChild(divMain1);
-//----------------------------------------------------------//
-
-	var labelMain2=document.createElement("label");
-	labelMain2.setAttribute("class","control-label col-sm-2");
-	labelMain2.innerHTML="<b>Equipment:</b>";
-	labelMain2.style.textAlign="left";
-	
-	var divMain2=document.createElement("div");
-	divMain2.setAttribute("class","col-sm-4");
-	
-	var p2=document.createElement("p");
-	p2.style.textAlign="left";
-	p2.innerHTML="<strong>"+data.subject+"</strong>";
-	p2.style.color="black";
-	divMain2.appendChild(p2);
-	divMain.appendChild(labelMain2);
-	divMain.appendChild(divMain2);
-
-//---------------------------------------------------------------------------//
-	var divMain3=document.createElement("div");
-	divMain3.setAttribute("class","col-sm-1");
-	divMain3.setAttribute("data-toggle","tooltip");
-	divMain3.setAttribute("data-placement","left");
-	divMain3.setAttribute("title","Lodged");
-	divMain3.style.margin="3px 0px";
-	var cl="btn btn-danger";
-	if(data.status=="1"){
-		cl="btn btn-warning";
-		divMain3.setAttribute("title","In Process");
-	}
-	if(data.status=="2"){
-		cl="btn btn-info";
-		divMain3.setAttribute("title","Solved");
-	}
-	if(data.status=="3"){
-		cl="btn btn-success";
-		divMain3.setAttribute("title","Closed");
-	}
-	divMain3.innerHTML='<button type="button" class="'+cl+' btn-sm" data-toggle="collapse" data-target="#demo'+data.complaint_id+'"> <span class="glyphicon glyphicon-chevron-down"></span></button>';
-  	divMain.appendChild(divMain3);
-
-//----------------------------------------------------------------------------//
-
-var divColl=document.createElement("div");
-divColl.setAttribute("class","collapse");
-divColl.setAttribute("id","demo"+data.complaint_id);
-createCollapse(divColl,"Type:",data.type,"Assistance:",data.catagory);
-if(data.description==""){
-	data.description="none";
-}
-createCollapse(divColl,"Slot:",data.time_slot,"Description:",data.description);
-var status="Lodged";
-if(data.status=="1"){
-	status="In process";
-}
-if(data.status=="2"){
-	status="Solved";
-}
-if(data.status=="3"){
-	status="Closed";
-}
-createCollapse(divColl,"Cost:",data.cost,"Status:",status);
-if(status=="Solved")
-	createCollapseButton(divColl,data);
-//----------------------------------------------------------------------------//
-div.appendChild(divMain);
-div.appendChild(divColl);
-console.log(data);
-//console.log(collapseDiv.innerHTML);
-$("#history").append(div);
-$('[data-toggle="tooltip"]').tooltip(); 
-	//$("#history").append(collapseDiv);
-}
-
-function createCollapseButton(div,data){
-	var divMain = document.createElement("div");
-	divMain.setAttribute("class", "form-group");
-//------------------------------------------------------//
-	
-	var divMain1=document.createElement("Button");
-	divMain1.setAttribute("class","col-sm-offset-4 col-sm-2 btn btn-sm btn-primary");
-	divMain1.setAttribute("data-toggle","modal");
-	divMain1.setAttribute("data-target","#myModal");
-	var p1=document.createTextNode("Give Feedback");
-	divMain1.style.marginBottom="3px";
-	divMain1.onclick=function(){
-		$("#complaint_id").val(data.complaint_id);
-		console.log($("#complaint_id").val()+" "+data.complaint_id);
-	};
-	divMain1.appendChild(p1);
-	divMain.appendChild(divMain1);
-//----------------------------------------------------------//
-	
-	var divMain2=document.createElement("Button");
-	divMain2.setAttribute("class","col-sm-offset-4 col-sm-2 btn btn-sm btn-danger");
-	divMain2.style.marginBottom="3px";
-	var p2=document.createTextNode("Not Solved");
-	divMain2.appendChild(p2);
-	divMain.appendChild(divMain2);
-	div.appendChild(divMain);
-}
-
-function createCollapse(div,l1,v1,l2,v2){
-
-	var divMain = document.createElement("div");
-	divMain.setAttribute("class", "form-group");
-//------------------------------------------------------//
-	var labelMain1=document.createElement("label");
-	labelMain1.setAttribute("class","control-label col-sm-1");
-	labelMain1.innerHTML="<b>"+l1+"</b>";
-	labelMain1.style.textAlign="left";
-	
-	var divMain1=document.createElement("div");
-	divMain1.setAttribute("class","col-sm-4");
-	
-	var p1=document.createElement("p");
-	p1.style.textAlign="left";
-	p1.style.color="black";
-	p1.innerHTML="<strong>"+v1+"</strong>";
-	divMain1.appendChild(p1);
-	divMain.appendChild(labelMain1);
-	divMain.appendChild(divMain1);
-//----------------------------------------------------------//
-
-	var labelMain2=document.createElement("label");
-	labelMain2.setAttribute("class","control-label col-sm-2");
-	labelMain2.innerHTML="<b>"+l2+"</b>";
-	labelMain2.style.textAlign="left";
-	
-	var divMain2=document.createElement("div");
-	divMain2.setAttribute("class","col-sm-5");
-	
-	var p2=document.createElement("p");
-	p2.style.textAlign="left";
-	p2.innerHTML="<strong>"+v2+"</strong>";
-	p2.style.color="black";
-	divMain2.appendChild(p2);
-	divMain.appendChild(labelMain2);
-	divMain.appendChild(divMain2);
-	div.appendChild(divMain);
-}
-
-var lodge = $('#lodge');
-lodge.submit(function () {
-	$.ajax({
-		type: lodge.attr('method'),
-		url: lodge.attr('action'),
-		data: lodge.serialize(),
-		success: function (data) {
+		type:assignForm.attr('method'),
+		url: assignForm.attr('action'),
+		data: assignForm.serialize(),
+		timeout:10000,
+		success:function(data){
 			if(data=="true"){
-				// $("#container").fadeOut(function() {
-				//   $(this).text("World").fadeIn();
-				// });
-				$("#submitLodge").fadeOut("slow",function() {
-				  $(this).val("Registered");
+				console.log(typeof data);
+				$("#submitAssign").fadeOut("slow",function() {
+				  $(this).val("DONE");
 				  $(this).prop("disabled",true);
 				}).fadeIn("slow",function(){
-				}).fadeOut("slow",function(){
-					$(this).val("Lodge");
+				});
+				setTimeout(function(){$("#submitAssign").fadeOut("slow",function(){
+					$(this).val("Generate");
 					$(this).prop("disabled",false);
 				}).fadeIn("slow",function(){
-					$('#lodge')[0].reset();
-					$('#equipment option').remove();
-				});
+					$('#assignForm')[0].reset();
+				})},5000);
 			}
-		}	
+		},
+		error: function(jqXHR, textStatus){
+	        if(textStatus === 'timeout')
+	        {     
+	            alert('TimeOut Try Again');         
+	        }
+	    }
 	});
 	return false;
 });
 
-$('#logout').click(function(){
+$('#logoutButton').click(function(){
 	$.ajax({
 		type: 'get',
 		url: '/logout',
@@ -511,34 +290,274 @@ $('#logout').click(function(){
 		}
 	});
 });
-
-var values={};
-$( "#type" ).change(function() {
-  	$.ajax({
+/*
+$("#historyButton").click(function(){
+	console.log("yes");
+	$.ajax({
 		type: 'get',
-		url: '/complaint',
-		data: { 
-        "type": $("#type").val()
-    	},
-		success: function(data){
+		url: '/userComplaintHistory',
+		success: function (data) {
 			data=JSON.parse(data);
-			values={};
+			//console.log(data);
+			$("#historyDivChild").html("");
 			for(var i=0;i<data.length;++i){
-				var temp=data[i].equipment;
-				values[temp]=data[i].handman;
+				createHistory(data[i]);
 			}
-			$('#equipment option').remove();
-			$.each(values, function (i, items) {
-			    $('#equipment').append($('<option>', {
-			        text : i 
-			    }));  
-			});
-			$("#assistance").val(values[$("#equipment").val()]);
 		}
 	});
 });
 
-$( "#equipment" ).change(function(){
-	$("#assistance").val(values[$(this).val()]);
+$(document).ready(function(){
+	$('#infoButton').trigger('click');
 });
+
+$("#infoButton").click(function(){
+ 	$.ajax({
+		type: 'get',
+		url: '/getData',
+		success: function (data) {
+			console.log(data);
+			if(data=="false")
+				window.location.href = "./";
+			else{
+				var value=JSON.parse(data);
+				console.log(value);
+				$("#userName").html("&nbsp;&nbsp;&nbsp;&nbsp;"+value[0].name);
+				
+				$("#student_id").val(value[0].student_id);
+				//console.log("aaa "+$("#student_id").val());
+				$("#actype").html("&nbsp;&nbsp; Student");
+				$("#hostel").html("&nbsp;&nbsp; "+value[0].gender+" "+value[0].room_no);
+				$("#hostelParent").css("display","block");
+				$("#rollno").html("&nbsp;&nbsp; "+value[0].roll_no);
+				$("#rollnoParent").css("display","block");
+				
+				$("#email").html("&nbsp;&nbsp; "+value[0].email);
+				$("#mobile").html("&nbsp;&nbsp; "+value[0].phone_no);
+			}
+		},
+		complete:function(data){
+			$.ajax({
+				type:'get',
+				url:'/userComplaintAnalytics',
+				data:{
+					'student_id':$('#student_id').val()
+				},
+				success:function(data){
+					data=JSON.parse(data);
+					console.log(data);
+					if(data!="false"){
+						$("#complaintsRegistered").html(data[0].total);
+						$("#complaintsSolved").html(data[1].total);
+						$("#complaintsPending").html(data[0].total-data[1].total);
+					}
+				}
+			});
+		}	
+	});
+});
+
+
+
+	function createHistory(data){
+		if(data.status==0){
+			data.status="Lodged";
+		}
+		if(data.status==1){
+			data.status="In progress";
+		}
+		if(data.status==2){
+			data.status="Solved";
+		}
+		if(data.status==3){
+			data.status="Closed";
+		}
+
+		$('#historyDivChild').append(
+		'<div class=" w3-panel w3-white" style="width:90%" id="panel_'+data.complaint_id+'">'+
+			'<div class="w3-row">'+
+				'<div class="w3-third fontSourceSansPro">'+
+					'<h5><span class="fa fa-calendar w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><span><b>Date: &nbsp;</b></span><span> '+data.date.split("T")[0]+'</span></h6>'+
+				'</div>'+
+				'<div class="w3-third fontSourceSansPro">'+
+					'<h5><span class="fa fa-clock-o w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><h6><span><b>Time: &nbsp;</b></span><span >'+data.date.split("T")[1].split(".")[0]+'</span></h6>'+
+				'</div>'+
+				'<div class="w3-third fontSourceSansPro">'+
+					'<h5><span class="fa fa-lightbulb-o w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><span><b>Euipment: &nbsp;</b></span><span > '+data.subject+'</span></h6>'+
+				'</div>'+
+			'</div>'+
+			'<div class="w3-row">'+
+				'<div class="w3-third fontSourceSansPro">'+
+					'<h5><span class="fa fa-id-badge w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><span><b>C_Id: &nbsp;</b></span><span ><span class="w3-rest"> '+data.complaint_id+'</span></h6>'+
+				'</div>'+
+				'<div class="w3-third fontSourceSansPro">'+
+					'<h5><span class="fa fa-list-ul w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><span><b>Type: &nbsp;</b></span><span ><span class="w3-rest"> '+data.type+'</span></h6>'+
+				'</div>'+
+				'<div class="w3-third fontSourceSansPro">'+
+					'<h5><span class="fa fa-user-o w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><span><b>Assistance: &nbsp;</b></span><span ><span class="w3-rest"> '+data.catagory+'</span></h6>'+
+				'</div>'+
+			'</div>'+
+			'<div class="w3-row">'+
+				'<div class="w3-third fontSourceSansPro">'+
+					'<h5><span class="fa fa-clock-o w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><span><b>Slot: &nbsp;</b></span><span ><span class="w3-rest"> '+data.time_slot+'</span></h6>'+
+				'</div>'+
+				'<div class="w3-third fontSourceSansPro">'+
+					'<h5><span class="fa fa-inr w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><span><b>Cost: &nbsp;</b></span><span ><span class="w3-rest"> '+data.cost+'</span></h6>'+
+				'</div>'+
+				'<div class="w3-third fontSourceSansPro w3-dropdown-hover">'+
+					'<h5><span class="fa fa-pencil w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><span><b>Description: &nbsp;</b></span><span ><span class="w3-rest"> '+data.description+'</span></h6>'+
+					'<div class="w3-dropdown-content w3-card-4" >'+
+				      '<div class="w3-container">'+
+				        '<p>'+data.descriptionFull+'</p>'+
+				      '</div>'+
+				    '</div>'+
+				'</div>'+
+			'</div>'+
+			'<div class="w3-row">'+
+				'<div class="w3-third fontSourceSansPro">'+
+					'<h5><span class="fa fa-key w3-col m1 s3 w3-hide-small w3-hide-medium"> </span></h5><h6><span> <b>OTP : &nbsp;&nbsp;</b></span><span ><span class="w3-rest"> '+data.otp+'</span></h6>'+
+				'</div>'+
+				'<div class="w3-third fontSourceSansPro">'+
+					'<h5><span class="fa fa-spinner w3-col m1 s3 w3-hide-small w3-hide-medium"> </span></h5><h6><span> <b>Status : &nbsp;</b></span><span ><span class="w3-rest"> '+data.status+'</span></h6>'+
+				'</div>'+
+				'<div class="w3-third fontSourceSansPro">'+
+					'<h5><span class="fa fa-male w3-col m1 s3 w3-hide-small w3-hide-medium"> </span></h5><h6><span><b> HandyMan: </b></span><span ><span class="w3-rest"> '+data.name+'</span></h6>'+
+				'</div>'+
+				
+			'</div>'+
+		'</div>');
+		if(data.status=="Solved"){
+			$('#feedback_'+data.complaint_id).css('display','block');
+			$('#panel_'+data.complaint_id).addClass('w3-border-blue w3-rightbar');
+		}
+		if(data.status=="In progress"){
+			$('#panel_'+data.complaint_id).addClass('w3-border-yellow w3-rightbar');
+		}
+		if(data.status=="Lodged"){
+			$('#panel_'+data.complaint_id).addClass('w3-border-red w3-rightbar');
+		}
+		if(data.status=="Closed"){
+			$('#panel_'+data.complaint_id).addClass('w3-border-green w3-rightbar');
+		}
+	}*/
+
+function createAssignForm(data){
+	$("#assignForm").append(
+		'<div class="w3-row w3-margin-top" style="margin:0 auto;">'+
+			'<div class="w3-col m1 w3-container s2 w3-center">'+
+			'	<div class="w3-container w3-flat-belize-hole">'+
+			'	  	<h3 class="fontSourceSansPro w3-text-white">'+(data.Catagory).charAt(0)+'</h3>'+
+			'	</div>'+
+			'</div>'+
+			'<div class="w3-col m3 s3">'+
+			'	<h5>'+data.name+'</h5>'+
+			'</div>'+
+			'<div class="w3-col m3 s3">'+
+			'	<h5>'+data.phone_no+'</h5>'+
+			'</div>'+
+			'<div class="w3-col m3 s3">'+
+			'	<h5>'+data.email+'</h5>'+
+			'</div>'+
+			'<div class="w3-col m1 s1 w3-right">'+
+				'<input class="w3-check" type="checkbox" name="handyman_'+data.handyman_id+'">'+
+			'</div>'+
+		'</div>'
+	);
+}
+
+function createWatch(handymanType,data){
+	//console.log(data);
+	$("#watchDiv"+handymanType).append(
+		'<div class="w3-panel w3-white w3-margin-top ">'+
+			'<div class="w3-row fontSourceSansPro" style="margin:0 auto;">'+
+				'<div class="w3-col m3 w3-mobile">'+
+				'	<h5>'+data.name+'</h5>'+
+				'</div>'+
+				'<div class="w3-col m3 w3-mobile">'+
+				'	<h5>'+data.phone_no+'</h5>'+
+				'</div>'+
+				'<div class="w3-col m4 w3-mobile">'+
+				'	<h5>'+data.email+'</h5>'+
+				'</div>'+
+				'<div class="w3-col m1 w3-mobile">'+
+					'<h5>'+data.rating+'<span class="fa fa-star"></span></h5>'+
+				'</div>'+
+				'<div class="w3-right">'+
+					'<button class="w3-button w3-flat-belize-hole w3-hover-blue" type="button" style="width:100%;" id="watch_'+data.handyman_id+'"><i class="fa fa-caret-down" aria-hidden="true"></i></button>'+
+				'</div>'+
+			'</div>'+
+			'<div class="w3-hide" id="watchAnalysisDiv_'+data.handyman_id+'">'+
+				'<div class="w3-section w3-row">'+
+					'<div class="w3-center">'+
+						'<header class="w3-container w3-center w3-flat-belize-hole">'+
+						  '	<h5 class="fontSourceSansPro w3-center w3-text-white" >Today"s Analysis</h5>'+
+						'</header>'+
+					'</div>'+
+					'<div class="w3-third">'+
+					'	<header style="text-align: center;" class="fontSourceSansPro">'+
+					'		<span class="w3-border-bottom w3-border-blue w3-tag w3-jumbo w3-flat-belize-hole w3-padding-large">'+
+					'		<span id="todayComplaintsRegistered_'+data.handyman_id+'">NA</span>'+
+					'		<h5 style="padding:0;margin:0;">Registered</h5></span>'+
+					'	</header>'+
+					'</div>'+
+					'<div class="w3-third">'+
+					'	<header style="text-align: center;" class="fontSourceSansPro">'+
+					'		<span class="w3-border-bottom w3-border-blue w3-tag w3-jumbo w3-flat-belize-hole w3-padding-large">'+
+					'		<span id="todayComplaintsSolved_'+data.handyman_id+'">NA</span>'+
+					'		<h5 style="padding:0;margin:0;">Completed</h5></span>'+
+					'	</header>'+
+					'</div>'+
+					'<div class="w3-third w3-margin-bottom">'+
+					'	<header style="text-align: center;" class="fontSourceSansPro">'+
+					'		<span class="w3-border-bottom w3-border-blue w3-tag w3-jumbo w3-flat-belize-hole w3-padding-large">'+
+					'		<span id="todayComplaintsPending_'+data.handyman_id+'">NA</span>'+
+					'		<h5 style="padding:0;margin:0;">Pending</h5></span>'+
+					'	</header>'+
+					'</div>'+
+				'</div>'+
+
+				'<div class="w3-section">'+
+				'	<div class="w3-center">'+
+				'		<header class="w3-container w3-center w3-flat-belize-hole">'+
+				'		  	<h5 class="fontSourceSansPro w3-center w3-text-white" >Overall Analysis</h5>'+
+				'		</header>'+
+				'	</div>'+
+				'	<div class="w3-third">'+
+				'		<header style="text-align: center;" class="fontSourceSansPro">'+
+				'			<span class="w3-border-bottom w3-border-blue w3-tag w3-jumbo w3-flat-belize-hole w3-padding-large">'+
+				'			<span id="complaintsRegistered_'+data.handyman_id+'">NA</span>'+
+				'			<h5 style="padding:0;margin:0;">Registered</h5></span>'+
+				'		</header>'+
+				'	</div>'+
+				'	<div class="w3-third">'+
+				'		<header style="text-align: center;" class="fontSourceSansPro">'+
+				'			<span class="w3-border-bottom w3-border-blue w3-tag w3-jumbo w3-flat-belize-hole w3-padding-large">'+
+				'			<span id="complaintsSolved_'+data.handyman_id+'">NA</span>'+
+				'			<h5 style="padding:0;margin:0;">Completed</h5></span>'+
+				'		</header>'+
+				'	</div>'+
+				'	<div class="w3-third w3-margin-bottom">'+
+				'		<header style="text-align: center;" class="fontSourceSansPro">'+
+				'			<span class="w3-border-bottom w3-border-blue w3-tag w3-jumbo w3-flat-belize-hole w3-padding-large">'+
+				'			<span id="complaintsPending_'+data.handyman_id+'">NA</span>'+
+				'			<h5 style="padding:0;margin:0;">Unattended</h5></span>'+
+				'		</header>'+
+				'	</div>'+
+				'</div>'+
+			'</div>'+
+		'</div>'
+	);
+	$("#watch_"+data.handyman_id).click(function(){
+		$("#watchAnalysisDiv_"+data.handyman_id).toggleClass("w3-hide w3-animate-top");
+	})
+	$("#complaintsRegistered_"+data.handyman_id).html(data.issued);
+	$("#complaintsSolved_"+data.handyman_id).html(data.solved);
+	$("#complaintsPending_"+data.handyman_id).html(data.issued-data.solved);
+	var totalToday=data.slot1+data.slot2+data.slot3;
+	$("#todayComplaintsRegistered_"+data.handyman_id).html(totalToday);
+	$("#todayComplaintsSolved_"+data.handyman_id).html(data.today);
+	$("#todayComplaintsPending_"+data.handyman_id).html(totalToday-data.today);
+}
+
 </script>
+</html>

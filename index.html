@@ -99,7 +99,7 @@ input:-webkit-autofill {
 <body>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-8" style="background-color:#1ba2c4;min-height:100vh;">
+		<div class="col-md-8 col-sm-7 col-xs-6" style="background-color:#1ba2c4;min-height:100vh;">
 			<h1><b>Welcome To</b></h1>
 			<h2>IIIT-B Complain Management</h2>
 			<div style="margin:5em;">
@@ -111,8 +111,8 @@ input:-webkit-autofill {
 
 			<button type="button" id="toggleSign" class="btn btn-lg pull-right" style="margin-right:5em;background-color:white; color: #1ba2c4; border-radius:0px;"><span id="buttonText">Get Registered</span></button>
 		</div>
-		<div class="col-md-4" style="background-color:#FFFFFF;min-height:100vh;">
-			<h2 id="sign" style="font-family: 'Roboto', sans-serif; color:black;">Sign In</h2>
+		<div class="col-md-4 col-sm-5 col-xs-6" style="background-color:#FFFFFF;min-height:100vh;">
+			<h2 id="sign" style="font-family: 'Roboto', sans-serif; color:grey;">Sign In</h2>
 			<hr>
 			<div class="alignCenter" style="margin-top: 10em;">
 			<form id="form1" name="form1" method="get" action="/signin">
@@ -123,13 +123,13 @@ input:-webkit-autofill {
 					<input type="password" class="inputstyleSignIn" id="LogInEmail" name="password" onfocus="this.placeholder='';" onblur="this.placeholder='Password';" placeholder="Password">
 				</div>
 				<div class="form-group">
-				    <div class="col-md-4" style="padding:0px;">
+				    <div class="col-md-4 col-sm-4 col-xs-4" style="padding:0px;">
 				    <label class="radio-inline" style="color:black;"><input type="radio" id="type" name="type" value="S">Student</label>
 				    </div>
-				    <div class="col-md-5" style="padding:0px;">
+				    <div class="col-md-5 col-sm-5 col-xs-5" style="padding:0px;">
 				    <label class="radio-inline" style="color:black;"><input type="radio" id="type" name="type" value="H">HandyMan</label>	
 				    </div>
-				    <div class="col-md-3" style="padding:0px;">
+				    <div class="col-md-3 col-sm-3 col-xs-3" style="padding:0px;">
 				    <label class="radio-inline" style="color:black;"><input type="radio" id="type" name="type" value="A">Admin</label>	
 				    </div>
 				</div>
@@ -180,7 +180,8 @@ input:-webkit-autofill {
 </html>
 
 <script>
-
+sessionStorage.type;
+sessionStorage.email;
 var form1 = $('#form1');
 form1.submit(function () {
 	$.ajax({
@@ -192,6 +193,8 @@ form1.submit(function () {
 			var type=$('input[name="type"]:checked').val();
 			console.log(type);
 			if(data!="false"){
+				sessionStorage.type=type;
+				sessionStorage.email=$('#LogInName').val();
 				if(type=='S')
 					window.location.href = "student.html";
 				else if(type=='A')

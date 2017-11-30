@@ -50,7 +50,7 @@ app.get('/admin.html',function(req,resp){
 
 app.get('/getData',function(req,resp){
 	var sess=req.query;
-	console.log(sess);
+	//console.log(sess);
 	if(sess.email && sess.type=='S')
 		{
 		
@@ -61,7 +61,7 @@ app.get('/getData',function(req,resp){
 		    	resp.end("false");
 		    	return;
 		    		}
-		    console.log(result.length);
+		    //console.log(result.length);
 		    if(result.length==0){
 		    	resp.end("false");
 		    	return;
@@ -80,7 +80,7 @@ app.get('/getData',function(req,resp){
 		    	resp.end("false");
 		    	return;
 		    		}
-		    console.log(result.length);
+		    //console.log(result.length);
 		    if(result.length==0){
 		    	resp.end("false");
 		    	return;
@@ -99,7 +99,7 @@ app.get('/getData',function(req,resp){
 		    	resp.end("false");
 		    	return;
 		    		}
-		    console.log(result.length);
+		    //console.log(result.length);
 		    if(result.length==0){
 		    	resp.end("false");
 		    	return;
@@ -163,7 +163,7 @@ app.get('/signin',function(req,resp){
 		    	resp.end("false");
 		    	return;
 		    }
-		    console.log(result.length);
+		    //console.log(result.length);
 		    if(result.length==0){
 		    	resp.end("false");
 		    	return;
@@ -180,7 +180,7 @@ app.get('/signin',function(req,resp){
 		    	resp.end("false");
 		    	return;
 		    }
-		    console.log(result.length);
+		    //console.log(result.length);
 		    if(result.length==0){
 		    	resp.end("false");
 		    	return;
@@ -245,7 +245,7 @@ app.get('/userComplaintHistory',function(req,res){
 	var value=req.query;
 	var s_id=value.student_id;
 	var status=value.type;
-	console.log(value);
+	//console.log(value);
 	if(status==-1){
 		status='(0,1,2,3)';
 	}
@@ -260,7 +260,7 @@ app.get('/userComplaintHistory',function(req,res){
 			res.end("false");
 			return;
 		}
-		else
+		else if(status=="(0)" || status=="(0,1,2,3)")
 		{
 			sql="select * from complaint_info c where student_id='"+s_id+"' and handyman_id is null order by status;"
 		 	var finalResult=result;
@@ -277,12 +277,13 @@ app.get('/userComplaintHistory',function(req,res){
 		 });
 	     return;
 		}
+		res.end(JSON.stringify(result));
 	})
 })
 
 app.get('/userFeedback',function(req,res){
 	var value=req.query;
-	console.log(value);
+	//console.log(value);
 	var review=value.review;
 	var rating=value.rating;
 	var id=value.id;
@@ -304,7 +305,7 @@ app.get('/userFeedback',function(req,res){
 
 app.get('/userComplaintAnalytics',function(req,res){
 	var value=req.query;
-	console.log(value);
+	//console.log(value);
 	var sql="select count(*) as total from complaint_info where student_id="+value.student_id+" union select count(*) as solved from complaint_info where student_id="+value.student_id+" and status>=2";
 
 	con.query(sql,function(err,result){
@@ -339,6 +340,21 @@ app.get('/changeStudentPhone',function(res,req){
 	studentJS.changeStudentPhone(res,req,con);
 });
 
+app.get('/changeAdminPass',function(res,req){
+	adminJS.changeAdminPassword(res,req,con);
+});
+
+app.get('/changeAdminPhone',function(res,req){
+	adminJS.changeAdminPhone(res,req,con);
+});
+
+app.get('/adminComplaintAnalysis',function(res,req){
+	adminJS.adminComplaintAnalysis(res,req,con);
+});
+
+app.get('/adminGetAllHistory',function(req,res){
+	adminJS.getAllHistory(req,res,con);
+})
 
 app.get('/adminGetAllHandyManInfo',function(req,res){
 	adminJS.getHandyManInfo(req,res,con);
@@ -346,6 +362,14 @@ app.get('/adminGetAllHandyManInfo',function(req,res){
 
 app.get('/getHandyManRating',function(req,res){
 	adminJS.getHandyManRating(req,res,con);
+});
+
+app.get('/getAllEquipment',function(req,res){
+	adminJS.getAllEquipment(req,res,con);
+});
+
+app.get('/adminGetIndexPageData',function(req,res){
+	adminJS.adminGetIndexPageData(req,res);
 })
 
 app.get('/handyManGetWork',function(req,res){

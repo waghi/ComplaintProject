@@ -218,7 +218,7 @@
 	
 </body>
 <script>
-console.log(sessionStorage.sess);
+//console.log(sessionStorage.sess);
 $('[name="dashBoardButtons"]').click(function(){
 	$('[name="dashBoardButtons"]').removeClass('w3-border-light-grey w3-rightbar w3-flat-belize-hole');
 	$(this).addClass('w3-border-light-grey w3-rightbar w3-flat-belize-hole');
@@ -245,7 +245,7 @@ $('#workButton').click(function(){
 				return;
 			}
 			data=JSON.parse(data);
-			console.log(data);
+			//console.log(data);
 			$('[id^="workDivChildSlot"]').html('');
 			for(i in data){
 				if(data[i].time_slot=="10:00-12:00")
@@ -284,16 +284,16 @@ $("#infoButton").click(function(){
 			'type':sessionStorage.type
 		},
 		success: function (data) {
-			console.log(data);
+			//console.log(data);
 			if(data=="false")
 				window.location.href = "./";
 			else{
 				var value=JSON.parse(data);
-				console.log(value);
+				//console.log(value);
 				$("#userName").html("&nbsp;&nbsp;&nbsp;&nbsp;"+value[0].name);
 				
 				$("#handyman_id").val(value[0].handyman_id);
-				//console.log("aaa "+$("#student_id").val());
+				////console.log("aaa "+$("#student_id").val());
 				$("#actype").html("&nbsp;&nbsp; HandyMan");
 				$("#catagory").html("&nbsp;&nbsp; "+value[0].Catagory);
 				
@@ -322,7 +322,7 @@ $('#otpSolved').click(function(){
 			'handyman_id':$("#handyman_id").val()
 		},
 		success:function(data){
-			console.log(data);
+			//console.log(data);
 			if(data=="false"){
 				alert("Try Again");
 			}
@@ -454,7 +454,7 @@ function closeModal(data){
 
 
 $("#historyButton").click(function(){
-	console.log($('#historySelectType').val());
+	//console.log($('#historySelectType').val());
 	$.ajax({
 		type: 'get',
 		url: '/handyManComplaintHistory',
@@ -464,7 +464,7 @@ $("#historyButton").click(function(){
 		},
 		success: function (data) {
 			data=JSON.parse(data);
-			console.log(data);
+			//console.log(data);
 			$("#historyDivChild").html("");
 			for(var i=0;i<data.length;++i){
 				createWork('historyDivChild',data[i],true);
@@ -473,89 +473,7 @@ $("#historyButton").click(function(){
 		}
 	});
 });
-/*
 
-	function createHistory(data){
-		if(data.status==0){
-			data.status="Lodged";
-		}
-		if(data.status==1){
-			data.status="In progress";
-		}
-		if(data.status==2){
-			data.status="Solved";
-		}
-		if(data.status==3){
-			data.status="Closed";
-		}
-
-		$('#historyDivChild').append(
-		'<div class=" w3-panel w3-white" style="width:90%" id="panel_'+data.complaint_id+'">'+
-			'<div class="w3-row">'+
-				'<div class="w3-third fontSourceSansPro">'+
-					'<h5><span class="fa fa-calendar w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><span><b>Date: &nbsp;</b></span><span> '+data.date.split("T")[0]+'</span></h6>'+
-				'</div>'+
-				'<div class="w3-third fontSourceSansPro">'+
-					'<h5><span class="fa fa-clock-o w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><h6><span><b>Time: &nbsp;</b></span><span >'+data.date.split("T")[1].split(".")[0]+'</span></h6>'+
-				'</div>'+
-				'<div class="w3-third fontSourceSansPro">'+
-					'<h5><span class="fa fa-lightbulb-o w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><span><b>Euipment: &nbsp;</b></span><span > '+data.subject+'</span></h6>'+
-				'</div>'+
-			'</div>'+
-			'<div class="w3-row">'+
-				'<div class="w3-third fontSourceSansPro">'+
-					'<h5><span class="fa fa-id-badge w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><span><b>C_Id: &nbsp;</b></span><span ><span class="w3-rest"> '+data.complaint_id+'</span></h6>'+
-				'</div>'+
-				'<div class="w3-third fontSourceSansPro">'+
-					'<h5><span class="fa fa-list-ul w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><span><b>Type: &nbsp;</b></span><span ><span class="w3-rest"> '+data.type+'</span></h6>'+
-				'</div>'+
-				'<div class="w3-third fontSourceSansPro">'+
-					'<h5><span class="fa fa-user-o w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><span><b>Assistance: &nbsp;</b></span><span ><span class="w3-rest"> '+data.catagory+'</span></h6>'+
-				'</div>'+
-			'</div>'+
-			'<div class="w3-row">'+
-				'<div class="w3-third fontSourceSansPro">'+
-					'<h5><span class="fa fa-clock-o w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><span><b>Slot: &nbsp;</b></span><span ><span class="w3-rest"> '+data.time_slot+'</span></h6>'+
-				'</div>'+
-				'<div class="w3-third fontSourceSansPro">'+
-					'<h5><span class="fa fa-inr w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><span><b>Cost: &nbsp;</b></span><span ><span class="w3-rest"> '+data.cost+'</span></h6>'+
-				'</div>'+
-				'<div class="w3-third fontSourceSansPro w3-dropdown-hover">'+
-					'<h5><span class="fa fa-pencil w3-col m1 s3 w3-hide-small w3-hide-medium"></span></h5><h6><span><b>Description: &nbsp;</b></span><span ><span class="w3-rest"> '+data.description+'</span></h6>'+
-					'<div class="w3-dropdown-content w3-card-4" >'+
-				      '<div class="w3-container">'+
-				        '<p>'+data.descriptionFull+'</p>'+
-				      '</div>'+
-				    '</div>'+
-				'</div>'+
-			'</div>'+
-			'<div class="w3-row">'+
-				'<div class="w3-third fontSourceSansPro">'+
-					'<h5><span class="fa fa-key w3-col m1 s3 w3-hide-small w3-hide-medium"> </span></h5><h6><span> <b>OTP : &nbsp;&nbsp;</b></span><span ><span class="w3-rest"> '+data.otp+'</span></h6>'+
-				'</div>'+
-				'<div class="w3-third fontSourceSansPro">'+
-					'<h5><span class="fa fa-spinner w3-col m1 s3 w3-hide-small w3-hide-medium"> </span></h5><h6><span> <b>Status : &nbsp;</b></span><span ><span class="w3-rest"> '+data.status+'</span></h6>'+
-				'</div>'+
-				'<div class="w3-third fontSourceSansPro">'+
-					'<h5><span class="fa fa-male w3-col m1 s3 w3-hide-small w3-hide-medium"> </span></h5><h6><span><b> HandyMan: </b></span><span ><span class="w3-rest"> '+data.name+'</span></h6>'+
-				'</div>'+
-				
-			'</div>'+
-		'</div>');
-		if(data.status=="Solved"){
-			$('#feedback_'+data.complaint_id).css('display','block');
-			$('#panel_'+data.complaint_id).addClass('w3-border-blue w3-rightbar');
-		}
-		if(data.status=="In progress"){
-			$('#panel_'+data.complaint_id).addClass('w3-border-yellow w3-rightbar');
-		}
-		if(data.status=="Lodged"){
-			$('#panel_'+data.complaint_id).addClass('w3-border-red w3-rightbar');
-		}
-		if(data.status=="Closed"){
-			$('#panel_'+data.complaint_id).addClass('w3-border-green w3-rightbar');
-		}
-	}*/
 
 function createWork(slot,data,flag){
 	$("#"+slot).append(

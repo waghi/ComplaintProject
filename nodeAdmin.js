@@ -1,3 +1,103 @@
+var fs=require('fs');
+
+function getAllEquipment(req,res,con){
+	var sql="select distinct(equipment) from master_data";
+	con.query(sql,function(err,result){
+		if(err){
+			console.log(err);
+			res.end("false");
+		}
+		res.end(JSON.stringify(result));
+	})
+}
+
+function getAllHistory(req,res,con){
+	var values=req.query;
+	var sInfoRadio=values.sInfoRadio;
+	var sInfoValue="";
+	var handyman_id="";
+	try{
+		sInfoValue=values.sInfoValue.trim();
+	}
+	catch(err){
+		sInfoValue=""
+	}
+	try{
+		handyman_id=values.handyman_id.trim();
+	}
+	catch(err){
+		handyman_id=""
+	}
+	//console.log(sInfoValue+" "+sInfoRadio);
+	//?subject=any&catagory=any&time_slot=any&type=any&status=any&rating=any
+	var subject=values.subject.trim();
+	var catagory=values.catagory.trim();
+	var time_slot=values.time_slot.trim();
+	var type=values.type.trim();
+	var status=values.status.trim();
+	var rating=values.rating.trim();
+	var sql="select * from complaint_info c,handyman_info h,student_info s where c.handyman_id=h.handyman_id and c.student_id=s.student_id ";
+	if(handyman_id!=""){
+		sql+="and c.handyman_id="+handyman_id+" ";
+	}
+	if(sInfoValue!=""){
+		if(sInfoRadio=="name"){
+			sql+="and s.name='"+sInfoValue+"' ";
+		}
+		if(sInfoRadio=="roll"){
+			sql+="and roll_no='"+sInfoValue+"' ";
+		}
+		if(sInfoRadio=="room"){
+			var r=sInfoValue.split(" ")[1];
+			var g=sInfoValue.split(" ")[0];
+			//console.log(r+" "+g);
+			sql+="and room_no="+r+" and gender='"+g+"' ";
+		}
+	}
+	if(subject!="Any"){
+		sql+="and subject='"+subject+"' ";
+	}
+	if(catagory!="Any"){
+		sql+="and c.catagory='"+catagory+"' ";
+	}
+	if(time_slot!="Any"){
+		sql+="and time_slot='"+time_slot+"' ";
+	}
+	if(type!="Any"){
+		sql+="and type='"+type+"' ";
+	}
+	if(status!="Any"){
+		if(status=="Lodged")
+			status="(0)";
+		if(status=="Unsolved")
+			status="(0,1)";
+		if(status=="Progress")
+			status="(1)";
+		if(status=="Solved")
+			status="(2,3)";
+		if(status=="Closed")
+			status="(3)";
+		sql+="and status in "+status+" ";
+	}
+	if(rating!="Any"){
+		if(rating=="Poor")
+			rating="(1,2)";
+		if(rating=="Average")
+			rating="(3)";
+		if(rating=="Good")
+			rating="(4,5)";
+		sql+="and rating in "+rating+" ";
+	}
+
+	con.query({sql:sql,nestTables: true},function(err,result){
+		if(err){
+			console.log(err);
+			res.end("false");
+		}
+		res.end(JSON.stringify(result));
+	})
+};
+
 function assignWorkHelper(Data,slot,result,status,res,con){
 	var id=null;
 	var min=10;
@@ -43,7 +143,7 @@ function assignWork(electricianData,carpenterData,con,res){
 			return;
 		}
 		else{
-			console.log(result);
+			//console.log(result);
 			var slot="slot1";
 			var e=0;
 			var c=0;
@@ -96,6 +196,65 @@ function assignWork(electricianData,carpenterData,con,res){
 			}
 		}
 		
+	});
+}
+
+
+function changeAdminPassword(req,res,con){
+	var admin_id=req.query.admin_id;
+	var old_pass=req.query.old_Pass;
+	var new_pass=req.query.new_Pass;
+	var sql="update admin_info set password=? where admin_id=? and password=?";
+	con.query(sql,[new_pass,admin_id,old_pass],function(err,result){
+		if(err!=null){
+			console.log(err);
+			res.end("false");
+		}
+		else if(result.affectedRows==1)
+			res.end("true");
+		else
+			res.end("old");
+	})
+};
+
+function changeAdminPhone(req,res,con){
+	var admin_id=req.query.admin_id;
+	var phone=req.query.new_phone;
+	var sql="update admin_info set phone_no=? where admin_id=?";
+	con.query(sql,[phone,admin_id],function(err,result){
+		if(err!=null){
+			console.log(err);
+			res.end("false");
+		}
+		else if(result.affectedRows==1)
+			res.end("true");
+		//console.log(result);
+		//console.log(req.query);
+	})
+};
+
+function adminComplaintAnalysis(req,res,con){
+	var sql="select count(*) as total from complaint_info union select count(*) as solved from complaint_info where status>=2";
+
+	con.query(sql,function(err,result){
+		if(err)
+		{
+			console.log(err);
+			res.end("false");
+			return;
+		}
+		else
+		{
+		 res.end(JSON.stringify(result));
+	     return;
+		}
+	});
+}
+
+function adminGetIndexPageData(req,res){
+	fs.readFile('Help_Details','utf8',function(err, data) {
+    	Help_Details='{'+data+'}';
+		res.end(Help_Details);
 	});
 }
 
@@ -158,7 +317,7 @@ module.exports={
 	},
 	getHandyManRating:function(req,res,con){
 		var handyman_id=req.query.handyman_id;
-		console.log(req.query);
+		//console.log(req.query);
 		var sql="select round(avg(rating),2) as rating from complaint_info where handyman_id="+handyman_id+" and rating is not null and rating<>0"
 		con.query(sql,function(err,result){
 			if(err!=null){
@@ -168,5 +327,28 @@ module.exports={
 			}
 			res.end(JSON.stringify(result));
 		});
+	},
+	getAllHistory:function(req,res,con){
+		getAllHistory(req,res,con);
+	},
+
+	getAllEquipment:function(req,res,con){
+		getAllEquipment(req,res,con);
+	},
+
+	changeAdminPassword:function(req,res,con){
+		changeAdminPassword(req,res,con);
+	},
+
+	changeAdminPhone:function(req,res,con){
+		changeAdminPhone(req,res,con);
+	},
+
+	adminComplaintAnalysis:function(req,res,con){
+		adminComplaintAnalysis(req,res,con);
+	},
+
+	adminGetIndexPageData:function(req,res){
+		adminGetIndexPageData(req,res);
 	}
 }

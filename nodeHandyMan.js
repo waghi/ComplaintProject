@@ -56,7 +56,7 @@ function complaintHistory(req,res,con){
 	if(type=="Unsolved"){
 		status="(1)";
 	}
-	console.log(type);
+	//console.log(type);
 	var sql="select * from complaint_info c,student_info s where handyman_id=? and status in "+status+" and c.student_id=s.student_id order by complaint_id";
 		con.query(sql,[[handyman_id]],function(err,result){
 		if(err){
@@ -95,8 +95,8 @@ function changeHandymanPhone(req,res,con){
 		}
 		else if(result.affectedRows==1)
 			res.end("true");
-		console.log(result);
-		console.log(req.query);
+		//console.log(result);
+		//console.log(req.query);
 	})
 };
 

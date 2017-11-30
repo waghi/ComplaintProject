@@ -110,6 +110,10 @@ input:-webkit-autofill {
 			</div>
 
 			<button type="button" id="toggleSign" class="btn btn-lg pull-right" style="margin-right:5em;background-color:white; color: #1ba2c4; border-radius:0px;"><span id="buttonText">Get Registered</span></button>
+			<div style="position: absolute;left: 10px;bottom: 10px;">
+				<h6><span class="glyphicon glyphicon-envelope">&nbsp;</span><code id="adminEmail">service@iiitb.org</code></h6>
+				<h6><span class="glyphicon glyphicon-phone">&nbsp;</span><code id="adminPhone">9998889990</code></h6>
+			</div>
 		</div>
 		<div class="col-md-4 col-sm-5 col-xs-6" style="background-color:#FFFFFF;min-height:100vh;">
 			<h2 id="sign" style="font-family: 'Roboto', sans-serif; color:grey;">Sign In</h2>
@@ -239,6 +243,19 @@ form2.submit(function () {
 			}	
 	});
 return false;
+});
+
+$.ajax({
+	type: 'get',
+	url: '/adminGetIndexPageData',
+	success: function (data) {
+		data=JSON.parse(data);
+		if(data.email)
+			$("#adminEmail").html(data.email);
+		if(data.phone)
+			$("#adminPhone").html(data.phone);
+
+	}
 });
 
 $( "#toggleSign" ).click(function() {

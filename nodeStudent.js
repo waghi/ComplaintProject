@@ -27,8 +27,8 @@ function changeStudentPhone(req,res,con){
 		}
 		else if(result.affectedRows==1)
 			res.end("true");
-		console.log(result);
-		console.log(req.query);
+		//console.log(result);
+		//console.log(req.query);
 	})
 };
 

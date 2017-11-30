@@ -230,7 +230,7 @@
 	  </div>
 </body>
 <script>
-console.log(sessionStorage);
+//console.log(sessionStorage);
 $('[name="dashBoardButtons"]').click(function(){
 	$('[name="dashBoardButtons"]').removeClass('w3-border-light-grey w3-rightbar w3-flat-belize-hole');
 	$(this).addClass('w3-border-light-grey w3-rightbar w3-flat-belize-hole');
@@ -268,20 +268,20 @@ $("[name^='star']").mouseover(function() {
     for(var j=1;j<=i;j++){
     	$("[name='star"+j+"']").removeClass();
     	$("[name='star"+j+"']").attr("class","fa fa-star w3-text-blue");
-    	console.log("sss "+j+"xxx "+i);
+    	//console.log("sss "+j+"xxx "+i);
 
     }
-    //console.log("HERE "+j+" "+i);
+    ////console.log("HERE "+j+" "+i);
     for(var j=5;j>i;j--){
     	$("[name='star"+j+"']").removeClass();
     	$("[name='star"+j+"']").attr("class","fa fa-star-o w3-text-blue");
     }
     $("#rating").val(i);
-    console.log($("#rating").val());
+    //console.log($("#rating").val());
 });
 
 $("#historyButton").click(function(){
-	console.log("yes");
+	//console.log("yes");
 	$.ajax({
 		type: 'get',
 		url: '/userComplaintHistory',
@@ -291,7 +291,7 @@ $("#historyButton").click(function(){
     	},
 		success: function (data) {
 			data=JSON.parse(data);
-			console.log(data);
+			//console.log(data);
 			$("#historyDivChild").html("");
 			for(var i=0;i<data.length;++i){
 				createHistory(data[i]);
@@ -356,16 +356,16 @@ $("#infoButton").click(function(){
 			'type':sessionStorage.type
 		},
 		success: function (data) {
-			console.log(data);
+			//console.log(data);
 			if(data=="false")
 				window.location.href = "./";
 			else{
 				var value=JSON.parse(data);
-				console.log(value);
+				//console.log(value);
 				$("#userName").html("&nbsp;&nbsp;&nbsp;&nbsp;"+value[0].name);
 				
 				$("#student_id").val(value[0].student_id);
-				//console.log("aaa "+$("#student_id").val());
+				////console.log("aaa "+$("#student_id").val());
 				$("#actype").html("&nbsp;&nbsp; Student");
 				$("#hostel").html("&nbsp;&nbsp; "+value[0].gender+" "+value[0].room_no);
 				$("#hostelParent").css("display","block");
@@ -385,7 +385,7 @@ $("#infoButton").click(function(){
 				},
 				success:function(data){
 					data=JSON.parse(data);
-					console.log(data);
+					//console.log(data);
 					if(data!="false"){
 						$("#complaintsRegistered").html(data[0].total);
 						if(data.length>1){

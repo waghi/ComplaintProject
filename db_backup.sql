@@ -173,7 +173,7 @@ CREATE TABLE `master_data` (
 
 LOCK TABLES `master_data` WRITE;
 /*!40000 ALTER TABLE `master_data` DISABLE KEYS */;
-INSERT INTO `master_data` VALUES ('Hostel','Carpenter','Table'),('Hostel','Carpenter','Chair'),('Hostel','Carpenter','Cupboard'),('Hostel','Electrician','Fan'),('Hostel','Electrician','Tubelight'),('Hostel','Electrician','Regulator'),('Personnel','Electrician','Iron'),('Personnel','Electrician','Kettle'),('Personnel','Electrician','Heater'),('Personnel','Carpenter','Table'),('Hostel','Carpenter','Door');
+INSERT INTO `master_data` VALUES ('Personnel','Carpenter','Table'),('Hostel','Cleaning','Room Cleaning'),('CommonArea','Plumber','Washroom'), ('AcademicArea','Carpenter','Others'),('AcademicArea','Carpenter','Table'),('AcademicArea','Electrician','Projector'),('Hostel','Carpenter','Table'),('Hostel','Carpenter','Chair'),('Hostel','Carpenter','Cupboard'),('Hostel','Electrician','Fan'),('Hostel','Electrician','Tubelight'),('Hostel','Electrician','Regulator'),('Personnel','Electrician','Iron'),('Personnel','Electrician','Kettle'),('Personnel','Electrician','Heater'),('Personnel','Carpenter','Table'),('Hostel','Carpenter','Door');
 /*!40000 ALTER TABLE `master_data` ENABLE KEYS */;
 UNLOCK TABLES;
 
